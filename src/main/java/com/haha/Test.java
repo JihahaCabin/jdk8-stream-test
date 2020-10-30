@@ -136,6 +136,31 @@ public class Test {
 
     }
 
+    /**
+     * 检测是否全部都满足指定的参数行为，如果全部满足则返回true，例如判断是否所有的学生都属于高一一班
+     */
+    public static void allMatchTest() {
+        boolean isMatch = students.stream().allMatch(student -> student.getClassName().equals("高一一班"));
+        System.out.println(isMatch);
+    }
+
+    /**
+     * 检测是否存在至少一个满足指定的参数行为，如果存在则返回true，例如判断学生中，是否有属于高一一班的学生
+     */
+    public static void anyMatchTest() {
+        boolean hasMatch = students.stream().anyMatch(student -> student.getClassName().equals("高一一班"));
+        System.out.println(hasMatch);
+    }
+
+    /**
+     * 检测是否全部都不满足指定的参数行为，如果全部都不满足则返回true，例如判断是否所有的学生都不属于高二一班
+     */
+    public static void noneMatchTest() {
+        boolean isMatch = students.stream().noneMatch(student -> student.getClassName().equals("高二一班"));
+        System.out.println(isMatch);
+    }
+
+
 
     public static void main(String[] args) {
 //        test1();
@@ -146,6 +171,9 @@ public class Test {
 //        sortTest();
 //        skipTest();
 //        mapTest();
-        flatMapTest();
+//        flatMapTest();
+//        allMatchTest();
+//        anyMatchTest();
+        noneMatchTest();
     }
 }
