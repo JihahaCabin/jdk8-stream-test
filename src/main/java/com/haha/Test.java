@@ -6,6 +6,7 @@ import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Test {
@@ -160,6 +161,35 @@ public class Test {
         System.out.println(isMatch);
     }
 
+    /**
+     * 返回符合条件的第一个数据
+     */
+    public static void findFirstTest() {
+        Optional<Student> firstOption = students.stream().filter(student -> student.getClassName().equals("高一一班")).findFirst();
+        //使用get，如果没有查找到，会抛出异常 NoSuchElementException
+        Student student = firstOption.get();
+        System.out.println(student);
+
+        //使用orElse或者orElseGet,如果没有查找到，则使用默认值返回，例如这里默认返回一个空的学生对象
+        Student student1 = firstOption.orElse(new Student());
+        System.out.println(student1);
+        Student student2 = firstOption.orElseGet(() -> new Student());
+        System.out.println(student2);
+    }
+
+
+    /**
+     * 返回符合条件的任意一个数据
+     */
+    public static void findAnyTest() {
+        Optional<Student> firstOption = students.stream().filter(student -> student.getClassName().equals("高一一班")).findAny();
+        //使用get，如果没有查找到，会抛出异常 NoSuchElementException，可以使用orElse或者orElseGet,当没有查找到，使用默认值返回
+        Student student = firstOption.get();
+        System.out.println(student);
+    }
+
+
+
 
 
     public static void main(String[] args) {
@@ -174,6 +204,8 @@ public class Test {
 //        flatMapTest();
 //        allMatchTest();
 //        anyMatchTest();
-        noneMatchTest();
+//        noneMatchTest();
+//        findFirstTest();
+        findAnyTest();
     }
 }
