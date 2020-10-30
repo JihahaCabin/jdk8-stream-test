@@ -241,6 +241,29 @@ public class Test {
         System.out.println(collect);
     }
 
+    /**
+     * 字符串拼接
+     */
+    public static void joiningTest() {
+        String names = students.stream().map(Student::getName).collect(Collectors.joining(","));
+        System.out.println(names);
+    }
+
+    /**
+     * 分组，例如根据班级分组
+     */
+    public static void groupingByTest() {
+        Map<String, List<Student>> collect = students.stream().collect(Collectors.groupingBy(Student::getClassName));
+        System.out.println(collect);
+    }
+
+    /**
+     * 分区，可以认为是分组的一种特殊情况，根据返回值为true/false,将集合按条件一分为二
+     */
+    public static void partitionByTest() {
+        Map<Boolean, List<Student>> map = students.stream().collect(Collectors.partitioningBy(student -> student.getClassName().equals("高一一班")));
+        System.out.println(map);
+    }
 
 
     public static void main(String[] args) {
@@ -262,6 +285,9 @@ public class Test {
 //        minAndMaxTest();
 //        sumTest();
 //        averageTest();
-        summaryTest();
+//        summaryTest();
+//        joiningTest();
+//        groupingByTest();
+        partitionByTest();
     }
 }
