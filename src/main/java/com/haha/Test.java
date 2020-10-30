@@ -265,6 +265,19 @@ public class Test {
         System.out.println(map);
     }
 
+    /**
+     * 将列表转为map
+     */
+    public static void toMapTest() {
+        //使用toMap,如果key重复，会报错
+        Map<Integer, String> collect = students.stream().collect(Collectors.toMap(Student::getId, Student::getName));
+        System.out.println(collect);
+        //指定key冲突解决方法，如果key重复，使用第二个key覆盖第一个key
+        Map<String, Student> collect1 = students.stream().collect(Collectors.toMap(Student::getClassName, Student -> Student, (key1, key2) -> key2));
+        System.out.println(collect1);
+
+    }
+
 
     public static void main(String[] args) {
 //        test1();
@@ -288,6 +301,7 @@ public class Test {
 //        summaryTest();
 //        joiningTest();
 //        groupingByTest();
-        partitionByTest();
+//        partitionByTest();
+        toMapTest();
     }
 }
