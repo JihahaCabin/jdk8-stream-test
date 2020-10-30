@@ -3,10 +3,7 @@ package com.haha;
 import com.sun.deploy.util.StringUtils;
 
 import javax.sound.midi.Soundbank;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Test {
@@ -189,6 +186,31 @@ public class Test {
     }
 
 
+    /**
+     * 计算数量，例如计算高一一班人数
+     */
+    public static void countTest() {
+        long size = students.stream().filter(student -> student.getClassName().equals("高一一班")).count();
+        System.out.println(size);
+    }
+
+    /**
+     * 获取最大最小值
+     */
+    public static void minAndMaxTest() {
+        //两种方式获取id最大的学生
+        Student student1 = students.stream().collect(Collectors.maxBy((s1, s2) -> s1.getId() - s2.getId())).get();
+        Student student2 = students.stream().collect(Collectors.maxBy(Comparator.comparing(Student::getId))).get();
+        System.out.println(student1);
+        System.out.println(student2);
+
+        //两种方式获取id最小的学生
+        Student student3 = students.stream().collect(Collectors.minBy((s1, s2) -> s1.getId() - s2.getId())).get();
+        Student student4 = students.stream().collect(Collectors.minBy(Comparator.comparing(Student::getId))).get();
+        System.out.println(student3);
+        System.out.println(student4);
+    }
+
 
 
 
@@ -206,6 +228,8 @@ public class Test {
 //        anyMatchTest();
 //        noneMatchTest();
 //        findFirstTest();
-        findAnyTest();
+//        findAnyTest();
+//        countTest();
+        minAndMaxTest();
     }
 }
