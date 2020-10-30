@@ -211,6 +211,35 @@ public class Test {
         System.out.println(student4);
     }
 
+    /**
+     * 计算某个字段值总和
+     */
+    public static void sumTest() {
+        Integer sum = students.stream().collect(Collectors.summingInt(Student::getId));
+        System.out.println(sum);
+
+        int sum1 = students.stream().mapToInt(Student::getId).sum();
+        System.out.println(sum1);
+    }
+
+    /**
+     * 计算某个字段的平均值
+     */
+    public static void averageTest() {
+        Double average = students.stream().collect(Collectors.averagingInt(Student::getId));
+        System.out.println(average);
+
+        double asDouble = students.stream().mapToInt(Student::getId).average().getAsDouble();
+        System.out.println(asDouble);
+    }
+
+    /**
+     * 一次性活出元素个数，总和，最大值，最小值和平均值
+     */
+    public static void summaryTest() {
+        IntSummaryStatistics collect = students.stream().collect(Collectors.summarizingInt(Student::getId));
+        System.out.println(collect);
+    }
 
 
 
@@ -230,6 +259,9 @@ public class Test {
 //        findFirstTest();
 //        findAnyTest();
 //        countTest();
-        minAndMaxTest();
+//        minAndMaxTest();
+//        sumTest();
+//        averageTest();
+        summaryTest();
     }
 }
