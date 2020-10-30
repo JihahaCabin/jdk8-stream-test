@@ -2,6 +2,7 @@ package com.haha;
 
 import com.sun.deploy.util.StringUtils;
 
+import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,16 +24,6 @@ public class Test {
 
     }
 
-
-    public static void main(String[] args) {
-//        test1();
-//        filterTest();
-//        forEachTest();
-//        distinctTest();
-//        limitTest();
-//        sortTest();
-        skipTest();
-    }
 
     /**
      * 数组与列表相互转换
@@ -116,5 +107,45 @@ public class Test {
     public static void skipTest() {
         List<Student> collect = students.stream().skip(3).collect(Collectors.toList());
         System.out.println(collect);
+    }
+
+    /**
+     * 映射 map,取出名称
+     */
+    public static void mapTest() {
+        List<String> collect = students.stream().map(Student::getName).collect(Collectors.toList());
+        System.out.println(collect);
+
+        int sum = students.stream().mapToInt(Student::getId).sum();
+        System.out.println(sum);
+    }
+
+
+    /**
+     * flatMap 将一个流中的每个值都转成一个个流，然后再将这些流扁平化成为一个流
+     */
+    public static void flatMapTest() {
+        String[] strings = {"good", "data"};
+
+        //如果直接拆分，获取到的会是一个数组列表，
+        List<String[]> collect = Arrays.asList(strings).stream().map(s -> s.split("")).collect(Collectors.toList());
+        System.out.println(collect);
+        //使用flatMap,使多个流，变成一个流
+        List<String> collect2 = Arrays.asList(strings).stream().map(s -> s.split("")).flatMap(strings1 -> Arrays.stream(strings1)).collect(Collectors.toList());
+        System.out.println(collect2);
+
+    }
+
+
+    public static void main(String[] args) {
+//        test1();
+//        filterTest();
+//        forEachTest();
+//        distinctTest();
+//        limitTest();
+//        sortTest();
+//        skipTest();
+//        mapTest();
+        flatMapTest();
     }
 }
