@@ -27,8 +27,11 @@ public class Test {
     public static void main(String[] args) {
 //        test1();
 //        filterTest();
-        forEachTest();
+//        forEachTest();
 //        distinctTest();
+//        limitTest();
+//        sortTest();
+        skipTest();
     }
 
     /**
@@ -88,5 +91,30 @@ public class Test {
     public static void distinctTest() {
         List<String> list = students.stream().map(Student::getClassName).distinct().collect(Collectors.toList());
         System.out.println(list);
+    }
+
+    /**
+     * 返回前n个元素，当集合元素少于n个，则返回所有元素
+     */
+    public static void limitTest() {
+
+        List<Student> collect = students.stream().limit(2).collect(Collectors.toList());
+        System.out.println(collect);
+    }
+
+    /**
+     * 排序，根据id，从大到小排序
+     */
+    public static void sortTest() {
+        List<Student> collect = students.stream().sorted((s1, s2) -> s2.getId() - s1.getId()).collect(Collectors.toList());
+        System.out.println(collect);
+    }
+
+    /**
+     * 跳过前n个元素
+     */
+    public static void skipTest() {
+        List<Student> collect = students.stream().skip(3).collect(Collectors.toList());
+        System.out.println(collect);
     }
 }
